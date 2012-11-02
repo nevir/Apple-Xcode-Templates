@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+TEMPLATE_PATHS = {
+  Mac: "Contents/Developer/Library/Xcode/Templates",
+  iOS: "Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates",
+}
+
+xcode_path = ARGV.shift
+version    = ARGV.shift
+
+`git checkout -b xcode-#{version}`
+
+TEMPLATE_PATHS.each do |kind, path|
+  `rm -rf #{kind}`
+  `mkdir #{kind}`
+  `cp -R "#{File.join(xcode_path, path)}/" #{kind}/`
+end
+
+`git commit -a -m "Xcode #{version}"`
