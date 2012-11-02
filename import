@@ -16,4 +16,5 @@ TEMPLATE_PATHS.each do |kind, path|
   `cp -R "#{File.join(xcode_path, path)}/" #{kind}/`
 end
 
-`git commit -a -m "Xcode #{version}"`
+`git add .`
+`git commit -m "Xcode #{version}"`
